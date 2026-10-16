@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Page Not Found — Vela</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Return to Vela's homepage.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Open+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <style>
+    .error-page {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(40px, 8vw, 100px) clamp(20px, 4vw, 68px);
+      background: var(--color-page-bg);
+    }
+    .error-page .eyebrow {
+      margin-bottom: 20px;
+    }
+    .error-page h1 {
+      font-family: var(--font-display);
+      font-weight: var(--weight-medium);
+      font-size: clamp(5rem, 18vw, 14rem);
+      line-height: 0.9;
+      color: var(--color-ink);
+      margin: 0 0 24px;
+      letter-spacing: -0.03em;
+    }
+    .error-page p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-muted);
+      max-width: 360px;
+      line-height: 1.6;
+      margin: 0 0 40px;
+    }
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="error-page">
+    <div class="eyebrow">404</div>
+    <h1>Lost<br>at sea.</h1>
+    <p>This page doesn't exist. Let's get you back to the waterfront.</p>
+    <div class="error-actions">
+      <a class="btn solid" href="/">Back to home</a>
+      <a class="btn" href="/menu">View menu</a>
+    </div>
+  </main>
+  <script src="/script.js"></script>
+</body>
+</html>
