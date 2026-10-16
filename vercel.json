@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "headers": [
         {
           "key": "X-Content-Type-Options",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "source": "/assets/(.*\\.(jpg|jpeg|png|svg|webp|gif|ico|woff2|woff|ttf))",
+      "source": "/assets/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -37,7 +37,16 @@
       ]
     },
     {
-      "source": "/(styles\\.css|script\\.js)",
+      "source": "/styles.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/script.js",
       "headers": [
         {
           "key": "Cache-Control",
