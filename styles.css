@@ -1116,7 +1116,6 @@ button.btn {
 .menu-filter-btn {
   border: 0;
   background: none;
-  border-radius: var(--button-radius);
   font-family: var(--font-body);
   font-weight: var(--weight-semibold);
   font-size: 0.78rem;

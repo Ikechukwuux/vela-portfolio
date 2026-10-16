@@ -307,7 +307,7 @@ function initMenu() {
     });
   }
 
-  // Handle URL hash on initial load
+  // Handle URL hash on initial load — always initialize filter state
   if (window.location.hash) {
     var hash = window.location.hash.substring(1);
     if (hash.indexOf('drinks-') === 0) {
@@ -324,7 +324,13 @@ function initMenu() {
         if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
         setActiveCategory(hash);
       }, 50);
+    } else {
+      // Hash present but not a category hash (e.g. #menu-dining direct anchor) — show all
+      setFilter('all', false);
     }
+  } else {
+    // No hash: explicitly initialize to 'all' so sections are shown and ARIA states are set
+    setFilter('all', false);
   }
 }
 
