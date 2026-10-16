@@ -1179,7 +1179,8 @@ body.menu-open .menu-toggle .menu-toggle__close {
   min-height: 54px;
   border-radius: 0;
   outline: none;
-  transition: border-color .2s, background .2s, box-shadow .2s;
+  caret-color: var(--color-primary);
+  transition: border-color .2s, box-shadow .2s;
   box-sizing: border-box;
 }
 
@@ -1189,12 +1190,16 @@ body.menu-open .menu-toggle .menu-toggle__close {
 }
 
 .field input:focus,
+.field input:focus-visible,
 .field textarea:focus,
-.field select:focus {
+.field textarea:focus-visible,
+.field select:focus,
+.field select:focus-visible {
   border-color: var(--color-primary);
-  background: rgba(229, 221, 203, 0.22);
+  border-bottom-color: var(--color-primary);
   outline: none;
   box-shadow: inset 0 -1px 0 0 var(--color-primary);
+  caret-color: var(--color-primary);
 }
 
 .field textarea {
@@ -1295,19 +1300,18 @@ body.menu-open .menu-toggle .menu-toggle__close {
   border-bottom-color: var(--color-primary);
 }
 
-/* Keyboard focus: visible underline emphasis — not a rectangular box */
+/* Focus: visible underline emphasis — not a rectangular box */
+.vela-select__trigger:focus,
 .vela-select__trigger:focus-visible {
   outline: none;
   border-bottom-color: var(--color-primary);
   /* Inset shadow adds a second line without layout shift */
   box-shadow: inset 0 -1px 0 0 var(--color-primary);
-  background: rgba(229, 221, 203, 0.22);
 }
 
 .vela-select.is-open .vela-select__trigger {
   border-bottom-color: var(--color-primary);
   box-shadow: inset 0 -1px 0 0 var(--color-primary);
-  background: rgba(229, 221, 203, 0.22);
 }
 
 /* ── Value text ──────────────────────────────────────────────────────────── */
@@ -1344,6 +1348,7 @@ body.menu-open .menu-toggle .menu-toggle__close {
 }
 
 .vela-select__trigger:hover .vela-select__chevron,
+.vela-select__trigger:focus .vela-select__chevron,
 .vela-select__trigger:focus-visible .vela-select__chevron {
   color: var(--color-primary);
 }
@@ -1477,7 +1482,8 @@ body.menu-open .menu-toggle .menu-toggle__close {
 }
 
 /* ── Open-state label (JS adds .field--select-open) ─────────────────────── */
-.field--select-open > label {
+.field--select-open > label,
+.field--date-open > label {
   color: var(--color-primary);
 }
 
@@ -1512,10 +1518,14 @@ body.menu-open .menu-toggle .menu-toggle__close {
   flex-shrink: 0;
 }
 
-/* ── Form text caret ─────────────────────────────────────────────────────── */
-.form input:not([type="date"]),
+/* ── Form text caret (uniform primary color) ─────────────────────────────── */
+input,
+textarea,
+.field input,
+.field textarea,
+.form input,
 .form textarea {
-  caret-color: var(--color-merlot);
+  caret-color: var(--color-primary);
 }
 
 .form__sr-status {
@@ -1576,17 +1586,16 @@ body.menu-open .menu-toggle .menu-toggle__close {
   border-bottom-color: var(--color-primary);
 }
 
+.vela-date__trigger:focus,
 .vela-date__trigger:focus-visible {
   outline: none;
   border-bottom-color: var(--color-primary);
   box-shadow: inset 0 -1px 0 0 var(--color-primary);
-  background: rgba(229, 221, 203, 0.22);
 }
 
 .vela-date.is-open .vela-date__trigger {
   border-bottom-color: var(--color-primary);
   box-shadow: inset 0 -1px 0 0 var(--color-primary);
-  background: rgba(229, 221, 203, 0.22);
 }
 
 /* ── Value text ──────────────────────────────────────────────────────────── */
@@ -1615,6 +1624,7 @@ body.menu-open .menu-toggle .menu-toggle__close {
 }
 
 .vela-date__trigger:hover .vela-date__icon,
+.vela-date__trigger:focus .vela-date__icon,
 .vela-date__trigger:focus-visible .vela-date__icon,
 .vela-date.is-open .vela-date__icon {
   color: var(--color-primary);

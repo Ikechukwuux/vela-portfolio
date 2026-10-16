@@ -14,7 +14,8 @@ const icons = {
   'mail': lucide.Mail,
   'map-pin': lucide.MapPin,
   'circle-alert': lucide.CircleAlert,
-  'circle-check': lucide.CircleCheck
+  'circle-check': lucide.CircleCheck,
+  'calendar': lucide.Calendar
 };
 
 const outDir = path.join('c:', 'Users', 'LENOVO', 'Downloads', 'vela-portfolio', 'assets', 'icons');

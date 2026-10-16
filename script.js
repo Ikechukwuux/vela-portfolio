@@ -476,7 +476,7 @@ document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('cl
   // ==========================================================================
   // 2. VELA CUSTOM DATE PICKER
   // ==========================================================================
-  var CALENDAR_ICON = '<svg class="vela-date__svg" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="14" height="14" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="17" y2="10"></line></svg>';
+  var CALENDAR_ICON = '<svg class="icon icon--sm vela-date__svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>';
   var PREV_ICON = '<svg viewBox="0 0 10 16" width="8" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1L1 8L9 15"/></svg>';
   var NEXT_ICON = '<svg viewBox="0 0 10 16" width="8" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1L9 8L1 15"/></svg>';
 
