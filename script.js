@@ -159,7 +159,176 @@ if (chapters.length && storyImgs.length) {
   });
   activate(initialBest, false);
 }
-document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;document.querySelectorAll('.menu-section').forEach(s=>{s.hidden=f!=='all'&&s.dataset.category!==f});document.querySelector('.menu-content')?.scrollIntoView({behavior:reduced?'auto':'smooth'})}));
+/* ============================================================================
+   Vela Menu Architecture — Primary & Subcategory Navigation with Scrollspy
+   ============================================================================ */
+function initMenu() {
+  var stickyNav = document.getElementById('menu-sticky-nav');
+  if (!stickyNav) return;
+
+  var filterBtns = stickyNav.querySelectorAll('.menu-filter-btn');
+  var subnavDining = document.getElementById('subnav-dining');
+  var subnavDrinks = document.getElementById('subnav-drinks');
+  var diningSection = document.getElementById('menu-dining');
+  var drinksSection = document.getElementById('menu-drinks');
+  var menuContent = document.getElementById('menu-content');
+  var catLinks = stickyNav.querySelectorAll('.menu-cat-link');
+  var currentFilter = 'all';
+  var isClickScrolling = false;
+  var scrollTimeout = null;
+
+  function setActiveCategory(targetId) {
+    if (!targetId) return;
+    var activeSubnav = currentFilter === 'dining' ? subnavDining : (currentFilter === 'drinks' ? subnavDrinks : null);
+    if (!activeSubnav) return;
+
+    var links = activeSubnav.querySelectorAll('.menu-cat-link');
+    var matchedLink = null;
+    links.forEach(function (link) {
+      var href = link.getAttribute('href') || '';
+      var cleanHref = href.replace(/^#/, '');
+      if (cleanHref === targetId) {
+        link.classList.add('is-active');
+        link.setAttribute('aria-current', 'true');
+        matchedLink = link;
+      } else {
+        link.classList.remove('is-active');
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    if (matchedLink) {
+      // Scroll active category smoothly into view within the horizontal rail
+      try {
+        matchedLink.scrollIntoView({
+          behavior: reduced ? 'auto' : 'smooth',
+          inline: 'nearest',
+          block: 'nearest'
+        });
+      } catch (err) {}
+    }
+  }
+
+  function setFilter(filter, shouldScroll) {
+    currentFilter = filter;
+
+    filterBtns.forEach(function (btn) {
+      var isActive = btn.dataset.filter === filter;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    if (filter === 'all') {
+      if (diningSection) diningSection.hidden = false;
+      if (drinksSection) drinksSection.hidden = false;
+      if (subnavDining) subnavDining.hidden = true;
+      if (subnavDrinks) subnavDrinks.hidden = true;
+      stickyNav.classList.remove('has-subnav');
+    } else if (filter === 'dining') {
+      if (diningSection) diningSection.hidden = false;
+      if (drinksSection) drinksSection.hidden = true;
+      if (subnavDining) subnavDining.hidden = false;
+      if (subnavDrinks) subnavDrinks.hidden = true;
+      stickyNav.classList.add('has-subnav');
+      var firstDining = subnavDining.querySelector('.menu-cat-link');
+      if (firstDining) {
+        setActiveCategory(firstDining.getAttribute('href').replace('#', ''));
+      }
+    } else if (filter === 'drinks') {
+      if (diningSection) diningSection.hidden = true;
+      if (drinksSection) drinksSection.hidden = false;
+      if (subnavDining) subnavDining.hidden = true;
+      if (subnavDrinks) subnavDrinks.hidden = false;
+      stickyNav.classList.add('has-subnav');
+      var firstDrinks = subnavDrinks.querySelector('.menu-cat-link');
+      if (firstDrinks) {
+        setActiveCategory(firstDrinks.getAttribute('href').replace('#', ''));
+      }
+    }
+
+    if (shouldScroll && menuContent) {
+      var targetSection = filter === 'drinks' ? drinksSection : (filter === 'dining' ? diningSection : menuContent);
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+      }
+    }
+  }
+
+  // Bind primary filter buttons
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setFilter(this.dataset.filter, true);
+    });
+  });
+
+  // Bind category anchor links
+  catLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var href = this.getAttribute('href');
+      if (!href || href.charAt(0) !== '#') return;
+      var targetEl = document.querySelector(href);
+      if (targetEl) {
+        e.preventDefault();
+        var targetId = href.substring(1);
+        setActiveCategory(targetId);
+
+        isClickScrolling = true;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function () {
+          isClickScrolling = false;
+        }, 800);
+
+        targetEl.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+        if (history.pushState) {
+          history.pushState(null, '', href);
+        }
+      }
+    });
+  });
+
+  // IntersectionObserver for scrollspy
+  var categories = document.querySelectorAll('.menu-category');
+  if ('IntersectionObserver' in window && categories.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      if (currentFilter === 'all' || isClickScrolling) return;
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          setActiveCategory(entry.target.id);
+        }
+      });
+    }, {
+      rootMargin: '-200px 0px -50% 0px',
+      threshold: 0
+    });
+
+    categories.forEach(function (cat) {
+      observer.observe(cat);
+    });
+  }
+
+  // Handle URL hash on initial load
+  if (window.location.hash) {
+    var hash = window.location.hash.substring(1);
+    if (hash.indexOf('drinks-') === 0) {
+      setFilter('drinks', false);
+      setTimeout(function () {
+        var el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+        setActiveCategory(hash);
+      }, 50);
+    } else if (hash.indexOf('dining-') === 0) {
+      setFilter('dining', false);
+      setTimeout(function () {
+        var el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+        setActiveCategory(hash);
+      }, 50);
+    }
+  }
+}
+
+initMenu();
 /* ============================================================================
    Vela Brand Reservation Form — Accessible Components & Validation System
    ----------------------------------------------------------------------------

@@ -1,1 +1,686 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Menu — Vela</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Open+Sans:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="styles.css"></head><body><header class="header scrolled"><nav class="nav"><div class="nav-left"><a class="nav-link" href="index.html">Home</a></div><a class="brand" href="index.html">VELA</a><div class="nav-right"><a class="nav-link" href="book.html">Book</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><svg class="icon icon--md menu-toggle__open" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg><svg class="icon icon--md menu-toggle__close" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div></nav></header><div class="mobile-menu"><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="book.html">Book</a></div><main><section class="page-hero"><h1>Food & Drink</h1><p>From first pour to last plate.</p></section><div class="menu-tabs"><button class="active" data-filter="all">All</button><button data-filter="dining">Dining</button><button data-filter="drinks">Drinks</button></div><div class="menu-content"><section class="menu-section reveal" data-category="dining"><h2>Dining</h2><div class="menu-grid"><article class="menu-item"><h3>Suya-spiced tuna</h3><span class="price">₦18,500</span><p>Avocado, tamarind, pickled shallot</p></article><article class="menu-item"><h3>Charred tiger prawns</h3><span class="price">₦24,000</span><p>Yaji butter, lime, smoked pepper</p></article><article class="menu-item"><h3>Plantain agnolotti</h3><span class="price">₦16,500</span><p>Brown butter, sage, aged cheese</p></article><article class="menu-item"><h3>Coal-roasted chicken</h3><span class="price">₦22,000</span><p>Fermented chilli, greens, jus</p></article><article class="menu-item"><h3>Short rib</h3><span class="price">₦31,000</span><p>Cassava, mushroom, pepper sauce</p></article><article class="menu-item"><h3>Coconut panna cotta</h3><span class="price">₦11,500</span><p>Passion fruit, toasted coconut</p></article></div></section><section class="menu-section reveal" data-category="drinks" style="background:var(--color-champagne)"><h2>Drinks</h2><div class="menu-grid"><article class="menu-item"><h3>Lagoon Light</h3><span class="price">₦12,500</span><p>Gin, cucumber, basil, sparkling wine</p></article><article class="menu-item"><h3>Velvet Hour</h3><span class="price">₦14,000</span><p>Dark rum, hibiscus, cacao, bitters</p></article><article class="menu-item"><h3>Marina 75</h3><span class="price">₦13,500</span><p>Cognac, citrus, champagne</p></article><article class="menu-item"><h3>Salt & Smoke</h3><span class="price">₦14,500</span><p>Mezcal, pineapple, alligator pepper</p></article><article class="menu-item"><h3>Zero Proof Sunset</h3><span class="price">₦8,500</span><p>Watermelon, lime leaf, tonic</p></article><article class="menu-item"><h3>House Champagne</h3><span class="price">₦95,000</span><p>Brut, France · bottle</p></article></div></section></div></main><footer class="footer"><div class="footer-top"><div class="footer-brand">VELA</div><div><h4>Hours</h4><p>Wed–Thu 6 PM–1 AM<br>Fri–Sun 5 PM–2 AM</p></div><div><h4>Reservations</h4><p><a href="book.html" class="text-link"><span>Book a table</span><svg class="icon icon--sm" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p></div></div><div class="footer-bottom"><span>© 2026 Vela Waterfront. Concept website.</span></div></footer><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Menu — Vela</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Open+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header scrolled">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-link" href="index.html">Home</a>
+      </div>
+      <a class="brand" href="index.html">VELA</a>
+      <div class="nav-right">
+        <a class="nav-link" href="book.html">Book</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="icon icon--md menu-toggle__open" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>
+          </svg>
+          <svg class="icon icon--md menu-toggle__close" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="book.html">Book</a>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <h1>Food &amp; Drink</h1>
+      <p>From first pour to last plate.</p>
+    </section>
+
+    <!-- Sticky Primary and Secondary Navigation -->
+    <div class="menu-sticky-nav" id="menu-sticky-nav">
+      <div class="menu-primary-nav" role="tablist" aria-label="Primary menu filters">
+        <button class="menu-filter-btn is-active" type="button" data-filter="all" role="tab" aria-selected="true" aria-controls="menu-content">All</button>
+        <button class="menu-filter-btn" type="button" data-filter="dining" role="tab" aria-selected="false" aria-controls="menu-dining">Dining</button>
+        <button class="menu-filter-btn" type="button" data-filter="drinks" role="tab" aria-selected="false" aria-controls="menu-drinks">Drinks</button>
+      </div>
+
+      <div class="menu-subnav-container">
+        <!-- Dining Subcategories -->
+        <nav class="menu-subnav" id="subnav-dining" aria-label="Dining categories" hidden>
+          <div class="menu-categories" role="navigation">
+            <a href="#dining-small-plates" class="menu-cat-link is-active" aria-current="true">Small Plates</a>
+            <a href="#dining-from-fire" class="menu-cat-link">From the Fire</a>
+            <a href="#dining-main-plates" class="menu-cat-link">Main Plates</a>
+            <a href="#dining-sides" class="menu-cat-link">Sides</a>
+            <a href="#dining-desserts" class="menu-cat-link">Desserts</a>
+          </div>
+        </nav>
+
+        <!-- Drinks Subcategories -->
+        <nav class="menu-subnav" id="subnav-drinks" aria-label="Drinks categories" hidden>
+          <div class="menu-categories" role="navigation">
+            <a href="#drinks-signature-cocktails" class="menu-cat-link is-active" aria-current="true">Signature Cocktails</a>
+            <a href="#drinks-classic-cocktails" class="menu-cat-link">Classic Cocktails</a>
+            <a href="#drinks-zero-proof" class="menu-cat-link">Zero Proof</a>
+            <a href="#drinks-wine-champagne" class="menu-cat-link">Wine &amp; Champagne</a>
+            <a href="#drinks-spirits" class="menu-cat-link">Spirits</a>
+            <a href="#drinks-beer-softs" class="menu-cat-link">Beer &amp; Softs</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Menu Content -->
+    <div class="menu-content" id="menu-content">
+
+      <!-- ====================================================================
+           DINING SECTION
+           ==================================================================== -->
+      <section class="menu-section reveal" id="menu-dining" data-category="dining">
+        <h2>Dining</h2>
+
+        <!-- 1. Small Plates -->
+        <section class="menu-category" id="dining-small-plates" data-menu-type="dining" data-category="small-plates">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Small Plates</h3>
+            <p class="menu-category__desc">Light coastal starters and raw bar selections with native seasonings.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Suya-spiced tuna</h4>
+                  <span class="menu-badge menu-badge--signature">Signature</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦18,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Avocado, tamarind, pickled shallot</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Charred tiger prawns</h4>
+                  <span class="menu-badge menu-badge--spicy">Spicy</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦24,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Yaji butter, lime, smoked pepper</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Crispy calamari &amp; plantain</h4>
+                  <span class="menu-badge menu-badge--nuts">Contains Nuts</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦16,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Ginger chili glaze, scallion, roasted groundnut</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 2. From the Fire -->
+        <section class="menu-category" id="dining-from-fire" data-menu-type="dining" data-category="from-fire">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">From the Fire</h3>
+            <p class="menu-category__desc">Open-flame seafood and slow-braised cuts infused with native wood smoke.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Coal-roasted chicken</h4>
+                  <span class="menu-badge menu-badge--spicy">Spicy</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦22,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Fermented chilli, greens, jus</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Short rib</h4>
+                  <span class="menu-badge menu-badge--signature">Signature</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦31,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Cassava, mushroom, pepper sauce</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Wood-grilled sea bass</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦28,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Scent leaf emulsion, charred lime, smoked sea salt</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 3. Main Plates -->
+        <section class="menu-category" id="dining-main-plates" data-menu-type="dining" data-category="main-plates">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Main Plates</h3>
+            <p class="menu-category__desc">Substantial culinary creations bridging local staples and contemporary technique.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Plantain agnolotti</h4>
+                  <span class="menu-badge menu-badge--veg">Vegetarian</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦16,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Brown butter, sage, aged cheese</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Jollof risotto &amp; lobster tail</h4>
+                  <span class="menu-badge menu-badge--signature">Signature</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦34,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Seafood reduction, smoked tomato, crispy leeks</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Roasted oyster mushroom &amp; grains</h4>
+                  <span class="menu-badge menu-badge--vegan">Vegan</span>
+                  <span class="menu-badge menu-badge--nuts">Contains Nuts</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦18,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Spiced fonio, braised greens, cashew cream</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 4. Sides -->
+        <section class="menu-category" id="dining-sides" data-menu-type="dining" data-category="sides">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Sides</h3>
+            <p class="menu-category__desc">Curated accompaniments prepared to order.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Truffle yam chips</h4>
+                  <span class="menu-badge menu-badge--veg">Vegetarian</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦6,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Spiced sea salt, herb aioli</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Sweet plantain dodo</h4>
+                  <span class="menu-badge menu-badge--vegan">Vegan</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦5,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Cinnamon sugar, chili crunch</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Charred seasonal greens</h4>
+                  <span class="menu-badge menu-badge--vegan">Vegan</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦6,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Garlic oil, toasted sesame, citrus</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 5. Desserts -->
+        <section class="menu-category" id="dining-desserts" data-menu-type="dining" data-category="desserts">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Desserts</h3>
+            <p class="menu-category__desc">Refined sweets celebrating regional fruits and confectionery.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Coconut panna cotta</h4>
+                  <span class="menu-badge menu-badge--veg">Vegetarian</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦11,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Passion fruit, toasted coconut</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Dark chocolate &amp; chin-chin tart</h4>
+                  <span class="menu-badge menu-badge--veg">Vegetarian</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦12,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Spiced chocolate ganache, spiced crumb, baobab cream</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Mango &amp; zobo sorbet</h4>
+                  <span class="menu-badge menu-badge--vegan">Vegan</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦9,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Fresh mint, candied ginger</p>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <!-- ====================================================================
+           DRINKS SECTION
+           ==================================================================== -->
+      <section class="menu-section reveal" id="menu-drinks" data-category="drinks">
+        <h2>Drinks</h2>
+
+        <!-- 1. Signature Cocktails -->
+        <section class="menu-category" id="drinks-signature-cocktails" data-menu-type="drinks" data-category="signature-cocktails">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Signature Cocktails</h3>
+            <p class="menu-category__desc">House concoctions developed for coastal sunsets and late evenings.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Lagoon Light</h4>
+                  <span class="menu-badge menu-badge--signature">Signature</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦12,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Gin, cucumber, basil, sparkling wine</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Velvet Hour</h4>
+                  <span class="menu-badge menu-badge--signature">Signature</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦14,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Dark rum, hibiscus, cacao, bitters</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Marina 75</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦13,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Cognac, citrus, champagne</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Salt &amp; Smoke</h4>
+                  <span class="menu-badge menu-badge--spicy">Spicy</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦14,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Mezcal, pineapple, alligator pepper</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 2. Classic Cocktails -->
+        <section class="menu-category" id="drinks-classic-cocktails" data-menu-type="drinks" data-category="classic-cocktails">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Classic Cocktails</h3>
+            <p class="menu-category__desc">Timeless bar standards poured with precision spirits.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Coastal Negroni</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦13,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Botanical gin, Italian bitter, sweet vermouth, orange peel</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Old Fashioned No. 4</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦14,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Aged bourbon, demerara, aromatic bitters, flamed orange</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Espresso Martini</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦13,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Single origin espresso, vodka, coffee liqueur</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 3. Zero Proof -->
+        <section class="menu-category" id="drinks-zero-proof" data-menu-type="drinks" data-category="zero-proof">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Zero Proof</h3>
+            <p class="menu-category__desc">Botanical distillates and house reductions without alcohol.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Zero Proof Sunset</h4>
+                  <span class="menu-badge menu-badge--zero">Zero Proof</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦8,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Watermelon, lime leaf, tonic</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Hibiscus Spritz</h4>
+                  <span class="menu-badge menu-badge--zero">Zero Proof</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦8,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Zobo reduction, sparkling water, citrus, mint</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Spiced Ginger Fizz</h4>
+                  <span class="menu-badge menu-badge--zero">Zero Proof</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦7,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Fresh ginger, lemongrass, lime, soda</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 4. Wine & Champagne -->
+        <section class="menu-category" id="drinks-wine-champagne" data-menu-type="drinks" data-category="wine-champagne">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Wine &amp; Champagne</h3>
+            <p class="menu-category__desc">Cellar selections available by the glass and bottle.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">House Champagne</h4>
+                  <span class="menu-badge menu-badge--signature">Signature</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price"><small>Glass</small> ₦18,000</span>
+                  <span class="menu-price"><small>Bottle</small> ₦95,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Brut, France · prestige cuvée</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Whispering Angel Rosé</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price"><small>Glass</small> ₦14,000</span>
+                  <span class="menu-price"><small>Bottle</small> ₦72,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Côtes de Provence, France</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Cloudy Bay Sauvignon Blanc</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price"><small>Glass</small> ₦15,000</span>
+                  <span class="menu-price"><small>Bottle</small> ₦78,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Marlborough, New Zealand</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Barolo DOCG</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price"><small>Bottle</small> ₦120,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Nebbiolo, Piedmont, Italy</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 5. Spirits -->
+        <section class="menu-category" id="drinks-spirits" data-menu-type="drinks" data-category="spirits">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Spirits</h3>
+            <p class="menu-category__desc">Single malts, agaves, and aged brandies served neat, on rock, or with service.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Macallan 12 Double Cask</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price"><small>Shot</small> ₦12,000</span>
+                  <span class="menu-price"><small>Bottle</small> ₦190,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Highland Single Malt Scotch</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Don Julio 1942</h4>
+                  <span class="menu-badge menu-badge--signature">Signature</span>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price"><small>Shot</small> ₦22,000</span>
+                  <span class="menu-price"><small>Bottle</small> ₦380,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Añejo Tequila, Jalisco · 100% Blue Agave</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Hennessy XO</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price"><small>Shot</small> ₦25,000</span>
+                  <span class="menu-price"><small>Bottle</small> ₦420,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Extra Old Cognac, France</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 6. Beer & Softs -->
+        <section class="menu-category" id="drinks-beer-softs" data-menu-type="drinks" data-category="beer-softs">
+          <header class="menu-category__header">
+            <h3 class="menu-category__title">Beer &amp; Softs</h3>
+            <p class="menu-category__desc">Chilled lagers, sparkling waters, and fresh pressed juices.</p>
+          </header>
+          <div class="menu-grid">
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Waterfront Craft Lager</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦4,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Crisp coastal draught · 330ml</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Heineken Extra Cold</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦4,000</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Premium lager · 330ml</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Artisan Still &amp; Sparkling Water</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦3,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Mineral spring water · 750ml</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item__heading">
+                <div class="menu-item__title-group">
+                  <h4 class="menu-item__name">Fresh Pressed Citrus</h4>
+                </div>
+                <div class="menu-item__prices">
+                  <span class="menu-price">₦4,500</span>
+                </div>
+              </div>
+              <p class="menu-item__description">Seasonal orange, passion fruit, lime</p>
+            </article>
+          </div>
+        </section>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">VELA</div>
+      <div>
+        <h4>Hours</h4>
+        <p>Wed–Thu 6 PM–1 AM<br>Fri–Sun 5 PM–2 AM</p>
+      </div>
+      <div>
+        <h4>Reservations</h4>
+        <p>
+          <a href="book.html" class="text-link">
+            <span>Book a table</span>
+            <svg class="icon icon--sm" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Vela Waterfront. Concept website.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

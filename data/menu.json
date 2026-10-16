@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "venue": "Vela",
+    "currency": "NGN",
+    "currencySymbol": "₦"
+  },
+  "dining": {
+    "name": "Dining",
+    "slug": "dining",
+    "categories": [
+      {
+        "name": "Small Plates",
+        "slug": "small-plates",
+        "id": "dining-small-plates",
+        "description": "Light coastal starters and raw bar selections with native seasonings.",
+        "items": [
+          {
+            "name": "Suya-spiced tuna",
+            "description": "Avocado, tamarind, pickled shallot",
+            "price": 18500,
+            "badges": ["Signature"]
+          },
+          {
+            "name": "Charred tiger prawns",
+            "description": "Yaji butter, lime, smoked pepper",
+            "price": 24000,
+            "badges": ["Spicy"]
+          },
+          {
+            "name": "Crispy calamari & plantain",
+            "description": "Ginger chili glaze, scallion, roasted groundnut",
+            "price": 16000,
+            "badges": ["Contains Nuts"]
+          }
+        ]
+      },
+      {
+        "name": "From the Fire",
+        "slug": "from-fire",
+        "id": "dining-from-fire",
+        "description": "Open-flame seafood and slow-braised cuts infused with native wood smoke.",
+        "items": [
+          {
+            "name": "Coal-roasted chicken",
+            "description": "Fermented chilli, greens, jus",
+            "price": 22000,
+            "badges": ["Spicy"]
+          },
+          {
+            "name": "Short rib",
+            "description": "Cassava, mushroom, pepper sauce",
+            "price": 31000,
+            "badges": ["Signature"]
+          },
+          {
+            "name": "Wood-grilled sea bass",
+            "description": "Scent leaf emulsion, charred lime, smoked sea salt",
+            "price": 28500,
+            "badges": []
+          }
+        ]
+      },
+      {
+        "name": "Main Plates",
+        "slug": "main-plates",
+        "id": "dining-main-plates",
+        "description": "Substantial culinary creations bridging local staples and contemporary technique.",
+        "items": [
+          {
+            "name": "Plantain agnolotti",
+            "description": "Brown butter, sage, aged cheese",
+            "price": 16500,
+            "badges": ["Vegetarian"]
+          },
+          {
+            "name": "Jollof risotto & lobster tail",
+            "description": "Seafood reduction, smoked tomato, crispy leeks",
+            "price": 34000,
+            "badges": ["Signature"]
+          },
+          {
+            "name": "Roasted oyster mushroom & grains",
+            "description": "Spiced fonio, braised greens, cashew cream",
+            "price": 18000,
+            "badges": ["Vegan", "Contains Nuts"]
+          }
+        ]
+      },
+      {
+        "name": "Sides",
+        "slug": "sides",
+        "id": "dining-sides",
+        "description": "Curated accompaniments prepared to order.",
+        "items": [
+          {
+            "name": "Truffle yam chips",
+            "description": "Spiced sea salt, herb aioli",
+            "price": 6500,
+            "badges": ["Vegetarian"]
+          },
+          {
+            "name": "Sweet plantain dodo",
+            "description": "Cinnamon sugar, chili crunch",
+            "price": 5500,
+            "badges": ["Vegan"]
+          },
+          {
+            "name": "Charred seasonal greens",
+            "description": "Garlic oil, toasted sesame, citrus",
+            "price": 6000,
+            "badges": ["Vegan"]
+          }
+        ]
+      },
+      {
+        "name": "Desserts",
+        "slug": "desserts",
+        "id": "dining-desserts",
+        "description": "Refined sweets celebrating regional fruits and confectionery.",
+        "items": [
+          {
+            "name": "Coconut panna cotta",
+            "description": "Passion fruit, toasted coconut",
+            "price": 11500,
+            "badges": ["Vegetarian"]
+          },
+          {
+            "name": "Dark chocolate & chin-chin tart",
+            "description": "Spiced chocolate ganache, spiced crumb, baobab cream",
+            "price": 12500,
+            "badges": ["Vegetarian"]
+          },
+          {
+            "name": "Mango & zobo sorbet",
+            "description": "Fresh mint, candied ginger",
+            "price": 9000,
+            "badges": ["Vegan"]
+          }
+        ]
+      }
+    ]
+  },
+  "drinks": {
+    "name": "Drinks",
+    "slug": "drinks",
+    "categories": [
+      {
+        "name": "Signature Cocktails",
+        "slug": "signature-cocktails",
+        "id": "drinks-signature-cocktails",
+        "description": "House concoctions developed for coastal sunsets and late evenings.",
+        "items": [
+          {
+            "name": "Lagoon Light",
+            "description": "Gin, cucumber, basil, sparkling wine",
+            "price": 12500,
+            "badges": ["Signature"]
+          },
+          {
+            "name": "Velvet Hour",
+            "description": "Dark rum, hibiscus, cacao, bitters",
+            "price": 14000,
+            "badges": ["Signature"]
+          },
+          {
+            "name": "Marina 75",
+            "description": "Cognac, citrus, champagne",
+            "price": 13500,
+            "badges": []
+          },
+          {
+            "name": "Salt & Smoke",
+            "description": "Mezcal, pineapple, alligator pepper",
+            "price": 14500,
+            "badges": ["Spicy"]
+          }
+        ]
+      },
+      {
+        "name": "Classic Cocktails",
+        "slug": "classic-cocktails",
+        "id": "drinks-classic-cocktails",
+        "description": "Timeless bar standards poured with precision spirits.",
+        "items": [
+          {
+            "name": "Coastal Negroni",
+            "description": "Botanical gin, Italian bitter, sweet vermouth, orange peel",
+            "price": 13000,
+            "badges": []
+          },
+          {
+            "name": "Old Fashioned No. 4",
+            "description": "Aged bourbon, demerara, aromatic bitters, flamed orange",
+            "price": 14000,
+            "badges": []
+          },
+          {
+            "name": "Espresso Martini",
+            "description": "Single origin espresso, vodka, coffee liqueur",
+            "price": 13500,
+            "badges": []
+          }
+        ]
+      },
+      {
+        "name": "Zero Proof",
+        "slug": "zero-proof",
+        "id": "drinks-zero-proof",
+        "description": "Botanical distillates and house reductions without alcohol.",
+        "items": [
+          {
+            "name": "Zero Proof Sunset",
+            "description": "Watermelon, lime leaf, tonic",
+            "price": 8500,
+            "badges": ["Zero Proof"]
+          },
+          {
+            "name": "Hibiscus Spritz",
+            "description": "Zobo reduction, sparkling water, citrus, mint",
+            "price": 8000,
+            "badges": ["Zero Proof"]
+          },
+          {
+            "name": "Spiced Ginger Fizz",
+            "description": "Fresh ginger, lemongrass, lime, soda",
+            "price": 7500,
+            "badges": ["Zero Proof"]
+          }
+        ]
+      },
+      {
+        "name": "Wine & Champagne",
+        "slug": "wine-champagne",
+        "id": "drinks-wine-champagne",
+        "description": "Cellar selections available by the glass and bottle.",
+        "items": [
+          {
+            "name": "House Champagne",
+            "description": "Brut, France · prestige cuvée",
+            "priceVariants": [
+              { "unit": "Glass", "price": 18000 },
+              { "unit": "Bottle", "price": 95000 }
+            ],
+            "badges": ["Signature"]
+          },
+          {
+            "name": "Whispering Angel Rosé",
+            "description": "Côtes de Provence, France",
+            "priceVariants": [
+              { "unit": "Glass", "price": 14000 },
+              { "unit": "Bottle", "price": 72000 }
+            ],
+            "badges": []
+          },
+          {
+            "name": "Cloudy Bay Sauvignon Blanc",
+            "description": "Marlborough, New Zealand",
+            "priceVariants": [
+              { "unit": "Glass", "price": 15000 },
+              { "unit": "Bottle", "price": 78000 }
+            ],
+            "badges": []
+          },
+          {
+            "name": "Barolo DOCG",
+            "description": "Nebbiolo, Piedmont, Italy",
+            "priceVariants": [
+              { "unit": "Bottle", "price": 120000 }
+            ],
+            "badges": []
+          }
+        ]
+      },
+      {
+        "name": "Spirits",
+        "slug": "spirits",
+        "id": "drinks-spirits",
+        "description": "Single malts, agaves, and aged brandies served neat, on rock, or with service.",
+        "items": [
+          {
+            "name": "Macallan 12 Double Cask",
+            "description": "Highland Single Malt Scotch",
+            "priceVariants": [
+              { "unit": "Shot", "price": 12000 },
+              { "unit": "Bottle", "price": 190000 }
+            ],
+            "badges": []
+          },
+          {
+            "name": "Don Julio 1942",
+            "description": "Añejo Tequila, Jalisco · 100% Blue Agave",
+            "priceVariants": [
+              { "unit": "Shot", "price": 22000 },
+              { "unit": "Bottle", "price": 380000 }
+            ],
+            "badges": ["Signature"]
+          },
+          {
+            "name": "Hennessy XO",
+            "description": "Extra Old Cognac, France",
+            "priceVariants": [
+              { "unit": "Shot", "price": 25000 },
+              { "unit": "Bottle", "price": 420000 }
+            ],
+            "badges": []
+          }
+        ]
+      },
+      {
+        "name": "Beer & Softs",
+        "slug": "beer-softs",
+        "id": "drinks-beer-softs",
+        "description": "Chilled lagers, sparkling waters, and fresh pressed juices.",
+        "items": [
+          {
+            "name": "Waterfront Craft Lager",
+            "description": "Crisp coastal draught · 330ml",
+            "price": 4500,
+            "badges": []
+          },
+          {
+            "name": "Heineken Extra Cold",
+            "description": "Premium lager · 330ml",
+            "price": 4000,
+            "badges": []
+          },
+          {
+            "name": "Artisan Still & Sparkling Water",
+            "description": "Mineral spring water · 750ml",
+            "price": 3500,
+            "badges": []
+          },
+          {
+            "name": "Fresh Pressed Citrus",
+            "description": "Seasonal orange, passion fruit, lime",
+            "price": 4500,
+            "badges": []
+          }
+        ]
+      }
+    ]
+  }
+}
