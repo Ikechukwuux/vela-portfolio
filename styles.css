@@ -1115,6 +1115,7 @@ button.btn {
 
 .menu-filter-btn {
   border: 0;
+  border-radius: 0;
   background: none;
   font-family: var(--font-body);
   font-weight: var(--weight-semibold);
@@ -1140,12 +1141,13 @@ button.btn {
   color: var(--color-primary);
   border-bottom-color: var(--color-primary);
   font-weight: var(--weight-bold);
+  border-radius: 0;
 }
 
 .menu-filter-btn:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-  border-radius: var(--button-radius);
+  border-radius: 0;
 }
 
 /* Secondary Subcategory Navigation */
@@ -1190,6 +1192,7 @@ button.btn {
   display: inline-flex;
   align-items: center;
   padding: 6px 14px;
+  border-radius: 0;
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: var(--weight-semibold);
@@ -1209,11 +1212,13 @@ button.btn {
 .menu-cat-link[aria-current="true"] {
   color: var(--color-primary);
   font-weight: var(--weight-bold);
+  border-radius: 0;
 }
 
 .menu-cat-link:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+  border-radius: 0;
 }
 
 /* ── Menu Section & Categories ───────────────────────────────────────────── */
