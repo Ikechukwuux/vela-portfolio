@@ -55,6 +55,9 @@
   /* Spacing & Layout Tokens */
   --ease: cubic-bezier(.22, 1, .36, 1);
   --pad: clamp(20px, 4vw, 68px);
+
+  /* Mobile Header Height — used in story split calculation */
+  --header-height-mobile: 70px;
 }
 
 /* ==========================================================================
@@ -130,6 +133,74 @@ h1, h2, h3 {
   letter-spacing: 0.18em;
   font-size: 0.72rem;
   color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Lucide Icon System
+   ========================================================================== */
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  color: currentColor;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.icon--xs {
+  width: 14px;
+  height: 14px;
+}
+
+.icon--sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon--md {
+  width: 20px;
+  height: 20px;
+}
+
+.icon--lg {
+  width: 24px;
+  height: 24px;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.text-link .icon {
+  transition: transform 250ms ease;
+}
+
+.text-link:hover .icon,
+.text-link:focus-visible .icon {
+  transform: translateX(5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-link:hover .icon,
+  .text-link:focus-visible .icon {
+    transform: none;
+  }
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-item .icon {
+  flex-shrink: 0;
+  color: currentColor;
 }
 
 /* ==========================================================================
@@ -229,8 +300,22 @@ body.menu-open .header .nav-link:after {
   color: inherit;
   width: 44px;
   height: 44px;
-  font-size: 1.4rem;
+  padding: 10px;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-toggle .menu-toggle__close {
+  display: none;
+}
+
+body.menu-open .menu-toggle .menu-toggle__open {
+  display: none;
+}
+
+body.menu-open .menu-toggle .menu-toggle__close {
+  display: block;
 }
 
 /* ==========================================================================
@@ -350,6 +435,10 @@ body.menu-open .header .nav-link:after {
   bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-body);
   font-size: 0.68rem;
   font-weight: var(--weight-semibold);
@@ -359,12 +448,18 @@ body.menu-open .header .nav-link:after {
 }
 
 .scroll-cue:after {
-  content: '↓';
+  content: none;
+}
+
+.scroll-cue__icon {
   display: block;
-  text-align: center;
-  font-size: 1.1rem;
-  margin-top: 8px;
   animation: bob 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__icon {
+    animation: none;
+  }
 }
 
 /* ==========================================================================
@@ -871,19 +966,17 @@ body.menu-open .header .nav-link:after {
    Page Hero (Inner Pages)
    ========================================================================== */
 .page-hero {
-  min-height: 58vh;
+  /* Reduced from 130/70px — eyebrow removed so less top air needed */
+  min-height: 52vh;
   background: var(--color-night);
   color: var(--color-white);
   display: grid;
   place-content: center;
   text-align: center;
-  padding: 130px 20px 70px;
+  padding: 110px 20px 60px;
 }
 
-.page-hero .eyebrow {
-  color: var(--color-champagne);
-  margin-bottom: 12px;
-}
+/* .page-hero .eyebrow removed — no eyebrow elements remain in page-heros */
 
 .page-hero h1 {
   font-family: var(--font-display);
@@ -891,7 +984,8 @@ body.menu-open .header .nav-link:after {
   font-size: clamp(3.6rem, 8.5vw, 7.8rem);
   line-height: 0.92;
   letter-spacing: -0.025em;
-  margin: 16px 0 12px;
+  /* No eyebrow above h1 — remove top margin; keep small bottom margin */
+  margin: 0 0 0;
   color: var(--color-white);
 }
 
@@ -901,7 +995,8 @@ body.menu-open .header .nav-link:after {
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   letter-spacing: 0.04em;
   color: rgba(247, 249, 250, 0.88);
-  margin: 0;
+  /* 18px between h1 and subtitle — comfortable without eyebrow buffer */
+  margin: 18px 0 0;
 }
 
 /* ==========================================================================
@@ -956,9 +1051,7 @@ body.menu-open .header .nav-link:after {
   background: var(--color-surface-alt);
 }
 
-.menu-section .eyebrow {
-  color: var(--color-primary);
-}
+/* .menu-section .eyebrow removed — no eyebrow elements remain in menu sections */
 
 .menu-section h2 {
   font-family: var(--font-display);
@@ -966,7 +1059,8 @@ body.menu-open .header .nav-link:after {
   font-size: clamp(2.8rem, 5.5vw, 5.5rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
-  margin: 10px 0 50px;
+  /* Top margin was 10px to separate from eyebrow above; now 0 (h2 is first in section) */
+  margin: 0 0 50px;
   color: var(--color-ink);
 }
 
@@ -1068,6 +1162,7 @@ body.menu-open .header .nav-link:after {
   letter-spacing: 0.16em;
   font-weight: var(--weight-semibold);
   color: var(--color-ink);
+  transition: color .2s;
 }
 
 .field input,
@@ -1075,25 +1170,36 @@ body.menu-open .header .nav-link:after {
 .field textarea {
   font-family: var(--font-body);
   font-size: 1rem;
+  line-height: 1.4;
   color: var(--color-ink);
   border: 0;
   border-bottom: 1.5px solid var(--color-border);
   background: transparent;
-  padding: 14px 0;
+  padding: 14px 2px;
+  min-height: 54px;
   border-radius: 0;
   outline: none;
-  transition: border-color .25s;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+  box-sizing: border-box;
+}
+
+.field input:hover,
+.field textarea:hover {
+  border-bottom-color: var(--color-primary);
 }
 
 .field input:focus,
-.field select:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   border-color: var(--color-primary);
-  outline: 2px solid var(--color-primary);
-  outline-offset: 4px;
+  background: rgba(229, 221, 203, 0.22);
+  outline: none;
+  box-shadow: inset 0 -1px 0 0 var(--color-primary);
 }
 
 .field textarea {
+  min-height: 130px;
+  padding: 14px 2px;
   resize: vertical;
 }
 
@@ -1105,26 +1211,700 @@ body.menu-open .header .nav-link:after {
 }
 
 .form .btn {
+  min-height: 52px;
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   border: 1px solid var(--color-primary);
   background: var(--color-primary);
   color: var(--color-white);
   cursor: pointer;
-  font-family: var(--font-body);
-  font-weight: var(--weight-semibold);
-  transition: background .3s, border-color .3s;
+  padding: 16px 24px;
+  border-radius: 0;
+  transition: background .2s, border-color .2s, box-shadow .2s, opacity .2s;
 }
 
 .form .btn:hover {
-  background: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
+  background: var(--color-merlot-dark);
+  border-color: var(--color-merlot-dark);
+}
+
+.form .btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-seafoam), 0 0 0 4px var(--color-primary);
 }
 
 .form .btn:disabled {
   background: var(--color-muted);
   border-color: var(--color-muted);
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
+/* ==========================================================================
+   Vela Brand Select — Custom Select Component
+   Progressive enhancement: native <select> stays for form submission.
+   JS adds .vela-select__native; CSS gates hide on .js class.
+   ========================================================================== */
+
+/* ── Focus: label turns Merlot when any field descendant has focus ─────────── */
+.field:focus-within > label {
+  color: var(--color-primary);
+}
+
+/* ── JS active: visually hide native selects, keep for form submission ──────── */
+.js .vela-select__native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Wrapper ─────────────────────────────────────────────────────────────── */
+.vela-select {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Trigger button ──────────────────────────────────────────────────────── */
+.vela-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--color-border);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink);
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+
+.vela-select__trigger:hover {
+  border-bottom-color: var(--color-primary);
+}
+
+/* Keyboard focus: visible underline emphasis — not a rectangular box */
+.vela-select__trigger:focus-visible {
+  outline: none;
+  border-bottom-color: var(--color-primary);
+  /* Inset shadow adds a second line without layout shift */
+  box-shadow: inset 0 -1px 0 0 var(--color-primary);
+  background: rgba(229, 221, 203, 0.22);
+}
+
+.vela-select.is-open .vela-select__trigger {
+  border-bottom-color: var(--color-primary);
+  box-shadow: inset 0 -1px 0 0 var(--color-primary);
+  background: rgba(229, 221, 203, 0.22);
+}
+
+/* ── Value text ──────────────────────────────────────────────────────────── */
+.vela-select__value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.vela-select__value.is-placeholder {
+  color: var(--color-muted);
+  opacity: 0.85;
+}
+
+/* ── Chevron ─────────────────────────────────────────────────────────────── */
+.vela-select__chevron-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  pointer-events: none;
+  color: var(--color-muted);
+}
+
+.vela-select__chevron {
+  display: block;
+  width: 16px;
+  height: 16px;
+  color: var(--color-muted);
+  transform: rotate(0deg);
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.vela-select__trigger:hover .vela-select__chevron,
+.vela-select__trigger:focus-visible .vela-select__chevron {
+  color: var(--color-primary);
+}
+
+.vela-select.is-open .vela-select__chevron {
+  color: var(--color-primary);
+  transform: rotate(180deg);
+}
+
+/* ── Listbox ─────────────────────────────────────────────────────────────── */
+.vela-select__listbox {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  background: var(--color-seafoam);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 18px 45px rgba(23, 20, 22, 0.12);
+  border-radius: 2px;
+  max-height: 280px;
+  overflow-y: auto;
+  outline: none;
+  scrollbar-color: var(--color-primary) transparent;
+  scrollbar-width: thin;
+  /* Hidden until open */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity .15s ease, transform .15s ease, visibility 0s .15s;
+}
+
+.vela-select__listbox::-webkit-scrollbar {
+  width: 7px;
+}
+
+.vela-select__listbox::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.vela-select__listbox::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border: 2px solid var(--color-seafoam);
+  border-radius: 999px;
+}
+
+.vela-select__listbox::-webkit-scrollbar-thumb:hover {
+  background: var(--color-merlot-dark);
+}
+
+.vela-select.is-open .vela-select__listbox {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity .15s ease, transform .15s ease, visibility 0s 0s;
+}
+
+/* Flip above trigger when near bottom of viewport */
+.vela-select.opens-above .vela-select__listbox {
+  top: auto;
+  bottom: calc(100% + 4px);
+  transform: translateY(4px);
+}
+
+.vela-select.opens-above.is-open .vela-select__listbox {
+  transform: translateY(0);
+}
+
+/* ── Options ─────────────────────────────────────────────────────────────── */
+.vela-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 10px 18px 10px 16px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: var(--weight-regular);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background .12s, color .12s;
+  user-select: none;
+}
+
+.vela-select__opt-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.vela-select__check {
+  display: none;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+/* Hover / keyboard-active state */
+.vela-select__option.is-active,
+.vela-select__option:hover {
+  background: var(--color-champagne);
+  color: var(--color-primary);
+}
+
+/* Selected state */
+.vela-select__option.is-selected {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.vela-select__option.is-selected .vela-select__check {
+  display: block;
+}
+
+/* Hover on selected — slightly deeper */
+.vela-select__option.is-selected.is-active,
+.vela-select__option.is-selected:hover {
+  background: var(--color-merlot-dark);
+  color: var(--color-white);
+}
+
+/* Disabled option */
+.vela-select__option.is-disabled {
+  color: var(--color-muted);
+  opacity: 0.65;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Open-state label (JS adds .field--select-open) ─────────────────────── */
+.field--select-open > label {
+  color: var(--color-primary);
+}
+
+/* ── Error state ─────────────────────────────────────────────────────────── */
+.field.has-error > label {
+  color: var(--color-primary);
+}
+
+.field.has-error input,
+.field.has-error textarea,
+.field.has-error .vela-select__trigger,
+.field.has-error .vela-date__trigger {
+  border-bottom-color: var(--color-primary);
+  box-shadow: inset 0 -1px 0 0 var(--color-primary);
+}
+
+.field__error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-primary);
+  margin-top: 4px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.01em;
+  transition: opacity .2s ease;
+}
+
+.field__error-msg .icon {
+  flex-shrink: 0;
+}
+
+/* ── Form text caret ─────────────────────────────────────────────────────── */
+.form input:not([type="date"]),
+.form textarea {
+  caret-color: var(--color-merlot);
+}
+
+.form__sr-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Vela Brand Date Picker — Custom Accessible Date Component
+   Progressive enhancement: native <input type="date"> stays in DOM.
+   JS adds .vela-date__native; CSS gates hide on .js class.
+   ========================================================================== */
+
+/* ── JS active: visually hide native date input, keep for form submission ──── */
+.js .vela-date__native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Date Picker Wrapper ─────────────────────────────────────────────────── */
+.vela-date {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Date Trigger Button ─────────────────────────────────────────────────── */
+.vela-date__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 2px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--color-border);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+
+.vela-date__trigger:hover {
+  border-bottom-color: var(--color-primary);
+}
+
+.vela-date__trigger:focus-visible {
+  outline: none;
+  border-bottom-color: var(--color-primary);
+  box-shadow: inset 0 -1px 0 0 var(--color-primary);
+  background: rgba(229, 221, 203, 0.22);
+}
+
+.vela-date.is-open .vela-date__trigger {
+  border-bottom-color: var(--color-primary);
+  box-shadow: inset 0 -1px 0 0 var(--color-primary);
+  background: rgba(229, 221, 203, 0.22);
+}
+
+/* ── Value text ──────────────────────────────────────────────────────────── */
+.vela-date__value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.vela-date__value.is-placeholder {
+  color: var(--color-muted);
+  opacity: 0.85;
+}
+
+/* ── Icon ────────────────────────────────────────────────────────────────── */
+.vela-date__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  pointer-events: none;
+  color: var(--color-muted);
+  transition: color .2s;
+}
+
+.vela-date__trigger:hover .vela-date__icon,
+.vela-date__trigger:focus-visible .vela-date__icon,
+.vela-date.is-open .vela-date__icon {
+  color: var(--color-primary);
+}
+
+/* ── Calendar Popover ────────────────────────────────────────────────────── */
+.vela-date__calendar {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 70;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: var(--color-seafoam);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 50px rgba(23, 20, 22, 0.14);
+  border-radius: 2px;
+  padding: 16px;
+  outline: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity .15s ease, transform .15s ease, visibility 0s .15s;
+  box-sizing: border-box;
+}
+
+.vela-date.is-open .vela-date__calendar {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity .15s ease, transform .15s ease, visibility 0s 0s;
+}
+
+.vela-date.opens-above .vela-date__calendar {
+  top: auto;
+  bottom: calc(100% + 4px);
+  transform: translateY(4px);
+}
+
+.vela-date.opens-above.is-open .vela-date__calendar {
+  transform: translateY(0);
+}
+
+/* ── Calendar Header ─────────────────────────────────────────────────────── */
+.vela-date__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.vela-date__title {
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
+}
+
+.vela-date__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background .15s, color .15s, border-color .15s;
+}
+
+.vela-date__nav-btn:hover,
+.vela-date__nav-btn:focus-visible {
+  background: var(--color-champagne);
+  color: var(--color-primary);
+  outline: none;
+}
+
+.vela-date__nav-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Weekday Labels ──────────────────────────────────────────────────────── */
+.vela-date__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.vela-date__weekday {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 0;
+}
+
+/* ── Days Grid ───────────────────────────────────────────────────────────── */
+.vela-date__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.vela-date__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  min-height: 38px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--color-ink);
+  cursor: pointer;
+  border-radius: 2px;
+  position: relative;
+  transition: background .12s, color .12s;
+  padding: 0;
+  user-select: none;
+}
+
+.vela-date__day:not(:disabled):hover,
+.vela-date__day.is-focused {
+  background: var(--color-champagne);
+  color: var(--color-primary);
+  outline: none;
+}
+
+/* Today indicator */
+.vela-date__day.is-today::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+/* Selected state */
+.vela-date__day.is-selected {
+  background: var(--color-primary) !important;
+  color: var(--color-white) !important;
+  font-weight: var(--weight-semibold);
+}
+
+.vela-date__day.is-selected::after {
+  background: var(--color-white);
+}
+
+/* Disabled (past) dates */
+.vela-date__day:disabled {
+  color: var(--color-muted);
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.vela-date__day.is-empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Footer Actions (Today & Clear) ──────────────────────────────────────── */
+.vela-date__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border);
+}
+
+.vela-date__action-btn {
+  background: none;
+  border: 0;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: background .15s, color .15s;
+}
+
+.vela-date__action-btn:hover,
+.vela-date__action-btn:focus-visible {
+  background: var(--color-champagne);
+  outline: none;
+}
+
+/* ── Open-state field label ──────────────────────────────────────────────── */
+.field--date-open > label {
+  color: var(--color-primary);
+}
+
+/* ── Mobile Calendar Bottom Sheet (< 600px) ──────────────────────────────── */
+@media (max-width: 600px) {
+  .vela-date__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 18, 23, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 120;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility 0s .25s;
+  }
+
+  .vela-date.is-open .vela-date__backdrop {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .25s ease, visibility 0s 0s;
+  }
+
+  .vela-date__calendar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+    padding: 20px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+    z-index: 121;
+    transform: translateY(100%);
+    box-shadow: 0 -10px 40px rgba(23, 20, 22, 0.25);
+    transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), opacity .25s ease;
+  }
+
+  .vela-date.is-open .vela-date__calendar {
+    transform: translateY(0);
+  }
+
+  .vela-date__mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .vela-date__mobile-title {
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .vela-date__mobile-close {
+    background: none;
+    border: 0;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--color-ink);
+    cursor: pointer;
+    padding: 8px;
+    margin: -8px;
+  }
+
+  .vela-date__day {
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 601px) {
+  .vela-date__backdrop,
+  .vela-date__mobile-header {
+    display: none !important;
+  }
+}
 /* ==========================================================================
    Viewport Reveals & Transitions
    ========================================================================== */
@@ -1208,27 +1988,117 @@ body.menu-open .header .nav-link:after {
     height: 55svh;
   }
 
+  /* ── Vela Rhythm — Mobile Split-Region Layout ──────────────────────────
+     Visual zones (example at 100svh screen with 70px header):
+       0–70px        : persistent header (fixed, z-index 50)
+       70px–52svh    : text region  — .chapter-content background + content
+       52svh–100svh  : image region — .story-stage sticky here (48svh tall)
+     ---------------------------------------------------------------------- */
+
   .story {
     display: block;
+    /* Night backdrop fills any gap between text and image regions */
+    background: var(--color-night);
   }
 
+  /* ── Story stage: sticky image in the lower viewport region ─────────── */
   .story-stage {
-    height: 55svh;
-    top: 70px;
+    /* Lock the image panel to the bottom portion of the viewport.
+       top: 52svh  → upper edge of the sticky image window
+       height: 48svh → image occupies the remaining lower viewport  */
+    position: sticky;
+    height: 48svh;
+    top: 52svh;
+    /* Ensure z-index sits below text panel but above the night bg */
+    z-index: 1;
   }
 
+  /* ── Images: preserve layered crossfade, tune timing for mobile ─────── */
+  .story-img {
+    transition:
+      opacity 1s ease,
+      transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.15s ease;
+  }
+
+  /* ── Chapters: tall enough to survive a fast swipe ─────────────────── */
   .story-chapters {
     position: relative;
+    /* Offset pushes the chapter stack so Dine starts at the top of
+       the text region (below the fixed header) */
+    margin-top: 0;
+    z-index: 2;
+    /* Transparent — night bg shows through to image region */
+    background: transparent;
   }
 
   .chapter {
-    min-height: auto;
-    padding: 75px var(--pad);
+    /* Each scene occupies one full viewport so a single swipe
+       does not skip through all three scenes */
+    min-height: 100svh;
+    /* Remove the desktop flex centering; on mobile we want the
+       content pinned to the top of the text region */
+    padding: 0;
+    display: block;
     opacity: 1;
+    /* Fully transparent — scene colour lives on .chapter-content */
+    background: transparent !important;
   }
 
+  /* ── Chapter-content: the visible text panel (upper ~52svh) ─────────── */
+  .chapter-content {
+    /* Occupy only the text region — from below header to the image top */
+    min-height: calc(52svh - var(--header-height-mobile));
+    /* Use a comfortable fraction of the available height instead of
+       a fixed pixel height so narrow phones (320px) still work */
+    padding: clamp(24px, 5svh, 48px) var(--pad) clamp(20px, 4svh, 36px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Relative so it stacks above the chapter's transparent bg */
+    position: relative;
+    z-index: 3;
+    /* Buttons and links remain interactive */
+    pointer-events: auto;
+    /* Prevent content from ever overflowing into the image region */
+    max-height: calc(52svh - var(--header-height-mobile) + 60px);
+    overflow: hidden;
+  }
+
+  /* Assign scene colours to the content wrapper, not the full chapter */
+  .chapter:nth-child(1) .chapter-content { background: var(--color-scene-dine); }
+  .chapter:nth-child(2) .chapter-content { background: var(--color-scene-night); }
+  .chapter:nth-child(3) .chapter-content { background: var(--color-scene-sunset); }
+
+  /* Restore the desktop colour assignment to the full chapter element
+     (it was moved to .chapter-content for mobile, noop at desktop) */
+  .chapter:nth-child(1),
+  .chapter:nth-child(2),
+  .chapter:nth-child(3) {
+    background: transparent;
+  }
+
+  /* Spacer after the last chapter — keeps Sunset visible before gallery */
+  .chapter:last-child {
+    padding-bottom: 60svh;
+  }
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
   .chapter h2 {
-    font-size: clamp(2.8rem, 10vw, 3.8rem);
+    font-size: clamp(2.4rem, 9vw, 3.4rem);
+    margin: 14px 0 18px;
+  }
+
+  .chapter p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .chapter .btn {
+    margin-top: 18px;
+    /* Ensure minimum touch target */
+    min-height: 44px;
+    min-width: 44px;
   }
 
   .footer-top {
@@ -1324,5 +2194,69 @@ body.menu-open .header .nav-link:after {
   .story-img.previous,
   .story-img.active {
     transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Portrait Tablet — 768 px – 900 px
+   Retains the mobile split-region layout; we simply give more room to the
+   text panel and the image stage since tall portrait tablets have the height.
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 900px) {
+  /* Portrait tablets: image panel slightly taller */
+  .story-stage {
+    height: 46svh;
+    top: 54svh;
+  }
+
+  /* Text panel can breathe a little more */
+  .chapter-content {
+    min-height: calc(54svh - var(--header-height-mobile));
+    max-height: calc(54svh - var(--header-height-mobile) + 80px);
+  }
+
+  /* Chapter font can be slightly larger on tablet */
+  .chapter h2 {
+    font-size: clamp(2.6rem, 6vw, 4rem);
+  }
+}
+
+/* ==========================================================================
+   High-Zoom Accessibility (≥200 % browser zoom)
+   At 200 % zoom svh-based sticky layouts become difficult to use.
+   Fall back to a normal-flow single-column layout so content stays usable.
+   ========================================================================== */
+@media (max-width: 800px) and (min-resolution: 192dpi),
+       (max-width: 800px) and (-webkit-min-device-pixel-ratio: 2) and (max-height: 480px) {
+  /* intentionally empty — svh values naturally reflow on high-DPR small screens */
+}
+
+/* True 200% text-zoom fallback — targets cases where the viewport narrows
+   significantly due to browser zoom level, not hardware pixel density */
+@media (max-width: 420px) and (max-height: 560px) {
+  .story-stage {
+    position: relative;
+    height: auto;
+    top: auto;
+    min-height: 220px;
+  }
+
+  .story-stage img.active {
+    position: relative;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .chapter {
+    min-height: auto;
+  }
+
+  .chapter-content {
+    min-height: auto;
+    max-height: none;
+  }
+
+  .chapter:last-child {
+    padding-bottom: 32px;
   }
 }

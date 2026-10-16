@@ -1,0 +1,10 @@
+{
+  "name": "vela-portfolio",
+  "private": true,
+  "scripts": {
+    "build:icons": "node scripts/generate-icons.js"
+  },
+  "devDependencies": {
+    "lucide": "^1.57.0"
+  }
+}
