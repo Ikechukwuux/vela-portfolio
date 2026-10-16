@@ -58,6 +58,12 @@
 
   /* Mobile Header Height — used in story split calculation */
   --header-height-mobile: 70px;
+
+  /* ── Button System Tokens ─────────────────────────────────────────────── */
+  --button-height: 52px;
+  --button-radius: 4px;
+  --button-padding-inline: 28px;
+  --button-icon-gap: 10px;
 }
 
 /* ==========================================================================
@@ -297,9 +303,12 @@ body.menu-open .header .nav-link:after {
   display: none;
   background: none;
   border: 0;
+  border-radius: var(--button-radius);
   color: inherit;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 10px;
   cursor: pointer;
   align-items: center;
@@ -465,13 +474,22 @@ body.menu-open .menu-toggle .menu-toggle__close {
 /* ==========================================================================
    Button System
    ========================================================================== */
-.btn {
+/* ── Shared Button Structure ─────────────────────────────────────────────── */
+.btn,
+a.btn,
+button.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  padding: 0 28px;
+  height: var(--button-height);
+  min-height: var(--button-height);
+  padding: 0 var(--button-padding-inline);
+  border-radius: var(--button-radius);
   border: 1px solid currentColor;
+  box-sizing: border-box;
+  line-height: 1;
+  white-space: nowrap;
+  gap: var(--button-icon-gap);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-family: var(--font-body);
@@ -480,6 +498,13 @@ body.menu-open .menu-toggle .menu-toggle__close {
   transition: background .3s, border-color .3s, color .3s;
   color: inherit;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--button-radius);
 }
 
 .btn:hover {
@@ -509,6 +534,11 @@ body.menu-open .menu-toggle .menu-toggle__close {
   background: var(--color-white);
   border-color: var(--color-white);
   color: var(--color-ink);
+}
+
+.hero .btn:focus-visible,
+.chapter .btn:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.85);
 }
 
 /* ==========================================================================
@@ -1086,6 +1116,7 @@ body.menu-open .menu-toggle .menu-toggle__close {
 .menu-filter-btn {
   border: 0;
   background: none;
+  border-radius: var(--button-radius);
   font-family: var(--font-body);
   font-weight: var(--weight-semibold);
   font-size: 0.78rem;
@@ -1115,6 +1146,7 @@ body.menu-open .menu-toggle .menu-toggle__close {
 .menu-filter-btn:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+  border-radius: var(--button-radius);
 }
 
 /* Secondary Subcategory Navigation */
@@ -1208,7 +1240,7 @@ body.menu-open .menu-toggle .menu-toggle__close {
 
 .menu-category {
   padding: 44px 0 28px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(216, 209, 196, 0.20);
   scroll-margin-top: 220px;
 }
 
@@ -1258,7 +1290,7 @@ body.menu-open .menu-toggle .menu-toggle__close {
 
 .menu-item {
   padding: 16px 0;
-  border-bottom: 1px solid rgba(216, 209, 196, 0.25);
+  border-bottom: 1px solid rgba(216, 209, 196, 0.12);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1434,20 +1466,16 @@ body.menu-open .menu-toggle .menu-toggle__close {
   font-family: var(--font-body);
 }
 
+/* Form submit — inherits shared .btn structure; overrides color role only */
 .form .btn {
-  min-height: 52px;
-  font-family: var(--font-body);
-  font-weight: var(--weight-semibold);
   font-size: 0.88rem;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid var(--color-primary);
+  border-color: var(--color-primary);
   background: var(--color-primary);
   color: var(--color-white);
-  cursor: pointer;
-  padding: 16px 24px;
-  border-radius: 0;
   transition: background .2s, border-color .2s, box-shadow .2s, opacity .2s;
+  /* Ensure width spans full field column */
+  width: 100%;
 }
 
 .form .btn:hover {
@@ -1458,6 +1486,7 @@ body.menu-open .menu-toggle .menu-toggle__close {
 .form .btn:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-seafoam), 0 0 0 4px var(--color-primary);
+  border-radius: var(--button-radius);
 }
 
 .form .btn:disabled {
